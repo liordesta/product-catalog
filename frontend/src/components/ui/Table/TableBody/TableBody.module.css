@@ -1,0 +1,11 @@
+.row {
+  display: flex;
+}
+
+.cell {
+  flex: 1;
+  padding: 8px 8px 8px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
