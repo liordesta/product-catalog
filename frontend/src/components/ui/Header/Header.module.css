@@ -1,0 +1,14 @@
+.title {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  font-size: 24px;
+  color: #011e3d;
+}
+.sub_title {
+  margin: 0;
+  font-weight: 100;
+  font-size: 14px;
+  color: #8e8e8e;
+  max-width: 800px;
+  word-break: break-word;
+}
