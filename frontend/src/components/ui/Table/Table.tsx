@@ -1,75 +1,67 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { SearchBar } from '../SearchBar/SearchBar';
+import { Select } from '../Select/Select';
+import { Fallback } from '../../Fallback/Fallback';
 import { TableHeader } from './TableHeader/TableHeader';
 import { TableBody } from './TableBody/TableBody';
-import type { TableRow, TableColumn, SortConfig } from './types';
+import { Pagination } from '../Pagination/Pagination';
+import type { TableRowData, TableColumn, SortConfig } from './types';
+import { FallbackType } from '../../Fallback/types';
+import { rowsPerPage } from './data';
 import classes from './Table.module.css';
 
 interface TableProps {
-  data: TableRow[];
+  data: TableRowData;
   columns: TableColumn[];
   rowHeight?: number;
-  height: number;
 }
 
 export const Table: React.FC<TableProps> = ({
   data,
   columns,
   rowHeight = 50,
-  height,
 }) => {
   const [sortConfig, setSortConfig] = useState<SortConfig>({
     key: '',
     direction: 'none',
   });
-  const [searchText, setSearchText] = useState('');
-
-  const filteredAndsortedData = useMemo(() => {
-    let filteredData = data;
-
-    if (searchText) {
-      filteredData = data.filter((row) =>
-        row.product_name.toLowerCase().includes(searchText.toLowerCase())
-      );
-    }
-
-    if (sortConfig.direction === 'none') return filteredData;
-
-    return filteredData.sort((a, b) => {
-      if (a[sortConfig.key] < b[sortConfig.key])
-        return sortConfig.direction === 'asc' ? -1 : 1;
-      if (a[sortConfig.key] > b[sortConfig.key])
-        return sortConfig.direction === 'asc' ? 1 : -1;
-      return 0;
-    });
-  }, [data, sortConfig, searchText]);
-
-  const handleSearch = (searchValue: string) => {
-    setSearchText(searchValue);
-  };
 
   return (
     <div>
-      <div>
-        <p className={classes.all_items}>225 from 225 items</p>
-      </div>
+      {data.products.length ? (
+        <div>
+          <p
+            className={classes.all_items}
+          >{`${data.products.length} from ${data.totalProducts} items`}</p>
+          <Select options={rowsPerPage} />
+        </div>
+      ) : null}
 
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar />
 
-      <div className={classes.table}>
-        <TableHeader
-          columns={columns}
-          sortConfig={sortConfig}
-          setSortConfig={setSortConfig}
+      {data.products.length ? (
+        <div className={classes.table}>
+          <TableHeader
+            columns={columns}
+            sortConfig={sortConfig}
+            setSortConfig={setSortConfig}
+          />
+
+          <TableBody
+            data={data.products}
+            rowHeight={rowHeight}
+            columns={columns}
+          />
+
+          <Pagination totalProducts={data.totalProducts} />
+        </div>
+      ) : (
+        <Fallback
+          type={FallbackType.NoResult}
+          title='No Products Found'
+          subTitle='Please try a different search term or Add some products to manage them here.'
         />
-
-        <TableBody
-          height={height}
-          filteredAndsortedData={filteredAndsortedData}
-          rowHeight={rowHeight}
-          columns={columns}
-        />
-      </div>
+      )}
     </div>
   );
 };

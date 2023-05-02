@@ -15,8 +15,13 @@ export interface TableRow {
   [key: string]: any;
 }
 
+export interface TableRowData {
+  products: TableRow[];
+  totalProducts: number;
+}
+
 export interface TableProps {
-  data: TableRow[];
+  data: TableRowData;
   columns: TableColumn[];
   rowHeight?: number;
   height: number;
