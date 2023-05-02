@@ -29,10 +29,8 @@ export const Table: React.FC<TableProps> = ({
   return (
     <div>
       {data.products.length ? (
-        <div>
-          <p
-            className={classes.all_items}
-          >{`${data.products.length} from ${data.totalProducts} items`}</p>
+        <div className={classes.all_items}>
+          <p>{`${data.products.length} from ${data.totalProducts} items`}</p>
           <Select options={rowsPerPage} />
         </div>
       ) : null}
