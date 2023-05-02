@@ -10,11 +10,12 @@ import { FallbackType } from '../Fallback/types';
 import classes from './Catalog.module.css';
 
 export const Catalog = () => {
-  const { page, itemsPerPage, searchText } = useAppContext();
+  const { page, itemsPerPage, searchText, sortConfig } = useAppContext();
   const { isLoading, error, data } = useProducts(
     page,
     itemsPerPage,
-    searchText
+    searchText,
+    sortConfig
   );
 
   if (error) {

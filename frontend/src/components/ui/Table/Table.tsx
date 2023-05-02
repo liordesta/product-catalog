@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { Select } from '../Select/Select';
 import { Fallback } from '../../Fallback/Fallback';
 import { TableHeader } from './TableHeader/TableHeader';
 import { TableBody } from './TableBody/TableBody';
 import { Pagination } from '../Pagination/Pagination';
-import type { TableRowData, TableColumn, SortConfig } from './types';
+import type { TableRowData, TableColumn } from './types';
 import { FallbackType } from '../../Fallback/types';
 import { rowsPerPage } from './data';
+import { useAppContext } from '../../../context/AppContext';
 import classes from './Table.module.css';
 
 interface TableProps {
@@ -21,10 +22,7 @@ export const Table: React.FC<TableProps> = ({
   columns,
   rowHeight = 50,
 }) => {
-  const [sortConfig, setSortConfig] = useState<SortConfig>({
-    key: '',
-    direction: 'none',
-  });
+  const { sortConfig, setSortConfig } = useAppContext();
 
   return (
     <div>
