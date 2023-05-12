@@ -1,54 +1,28 @@
-import type { FC } from 'react';
 import { SearchBar } from 'components/ui/SearchBar/SearchBar';
-import { Select } from 'components/ui/Select/Select';
 import { Fallback } from 'components/Fallback/Fallback';
-import { TableHeader } from './TableHeader/TableHeader';
-import { TableBody } from './TableBody/TableBody';
-import { Pagination } from 'components/ui/Pagination/Pagination';
-import type { TableRowData, TableColumn } from './types';
+import { TableContent } from './TableContent/TableContent';
+import { LoadingSpinner } from 'components/ui/LoadingSpinner/LoadingSpinner';
 import { FallbackType } from 'components/Fallback/types';
-import { rowsPerPage } from './tableConfig';
-import { useAppContext } from 'context/AppContext';
-import classes from './Table.module.css';
+import { TablePageItems } from './TablePageItems/TablePageItems';
+import type { TableProps } from './types';
+import type { FC } from 'react';
 
-interface TableProps {
-  data: TableRowData;
-  columns: TableColumn[];
-  rowHeight?: number;
-}
-
-export const Table: FC<TableProps> = ({ data, columns, rowHeight = 50 }) => {
-  const { sortConfig, setSortConfig } = useAppContext();
-
+export const Table: FC<TableProps> = ({
+  data,
+  columns,
+  rowHeight,
+  isFetching,
+}) => {
   return (
     <div>
-      {data.products.length ? (
-        <div className={classes.all_items}>
-          <p
-            className={classes.shown_items}
-          >{`${data.products.length} from ${data.totalProducts} items`}</p>
-          <Select options={rowsPerPage} />
-        </div>
-      ) : null}
+      {data.products.length && <TablePageItems data={data} />}
 
       <SearchBar />
 
-      {data.products.length ? (
-        <div className={classes.table}>
-          <TableHeader
-            columns={columns}
-            sortConfig={sortConfig}
-            setSortConfig={setSortConfig}
-          />
-
-          <TableBody
-            data={data.products}
-            rowHeight={rowHeight}
-            columns={columns}
-          />
-
-          <Pagination totalProducts={data.totalProducts} />
-        </div>
+      {isFetching ? (
+        <LoadingSpinner />
+      ) : data.products.length ? (
+        <TableContent columns={columns} rowHeight={rowHeight} data={data} />
       ) : (
         <Fallback
           type={FallbackType.NoResult}

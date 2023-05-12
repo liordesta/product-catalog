@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import type { TableColumn, TableRow } from '../types';
+import type { TableColumn, TableRow } from '../../types';
 import classes from './TableBody.module.css';
 
 interface TableBodyProps {

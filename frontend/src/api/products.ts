@@ -1,7 +1,6 @@
-import { useQuery } from 'react-query';
 import type { SortConfig } from 'components/ui/Table/types';
 
-type Key = {
+export type Key = {
   queryKey: [
     string,
     {
@@ -21,7 +20,7 @@ const API_URL =
     ? process.env.REACT_APP_API_URL_LOCAL
     : process.env.REACT_APP_API_URL_PROD;
 
-const fetchProducts = async (key: Key['queryKey']) => {
+export const fetchProducts = async (key: Key['queryKey']) => {
   const { page, itemsPerPage, q, sortConfig } = key[1];
 
   const searchParam = q ? `&q=${q}` : '';
@@ -37,18 +36,3 @@ const fetchProducts = async (key: Key['queryKey']) => {
   const data = await response.json();
   return data;
 };
-
-const useProducts = (
-  page: number,
-  itemsPerPage: number,
-  q: string,
-  sortConfig: SortConfig
-) => {
-  return useQuery(
-    ['products', { page, itemsPerPage, q, sortConfig }] as Key['queryKey'],
-    (key) => fetchProducts(key.queryKey),
-    { keepPreviousData: true }
-  );
-};
-
-export { useProducts };

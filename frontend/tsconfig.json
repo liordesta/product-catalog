@@ -13,6 +13,7 @@
       "@components/*": ["components/*"],
       "@context/*": ["context/*"],
       "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
     },
     "allowJs": true,
     "skipLibCheck": true,

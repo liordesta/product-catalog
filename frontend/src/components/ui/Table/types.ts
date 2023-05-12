@@ -24,7 +24,8 @@ export interface TableProps {
   data: TableRowData;
   columns: TableColumn[];
   rowHeight?: number;
-  height: number;
+  height?: number;
+  isFetching?: boolean;
 }
 
 type sortDirection = 'none' | 'asc' | 'desc';
