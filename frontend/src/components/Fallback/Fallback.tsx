@@ -1,15 +1,11 @@
-import React from 'react';
-import { Header } from '../ui/Header/Header';
-import noResult from '../../assets/no-result.png';
-import error from '../../assets/error.png';
+import type { FC } from 'react';
+import { Header } from 'components/ui/Header/Header';
+import noResult from 'assets/no-result.png';
+import error from 'assets/error.png';
 import type { FallbackProps } from './types';
 import classes from './Fallback.module.css';
 
-export const Fallback: React.FC<FallbackProps> = ({
-  type,
-  title,
-  subTitle,
-}) => {
+export const Fallback: FC<FallbackProps> = ({ type, title, subTitle }) => {
   const imagePath = {
     'no-result': noResult,
     error: error,

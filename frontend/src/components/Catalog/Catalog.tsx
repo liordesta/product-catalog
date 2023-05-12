@@ -1,12 +1,11 @@
-import React from 'react';
-import { Header } from '../ui/Header/Header';
-import { Table } from '../ui/Table/Table';
-import { LoadingSpinner } from '../ui/LoadingSpinner/LoadingSpinner';
-import { Fallback } from '../Fallback/Fallback';
-import { useProducts } from '../../api';
-import { columns } from '../ui/Table/data';
-import { useAppContext } from '../../context/AppContext';
-import { FallbackType } from '../Fallback/types';
+import { Header } from 'components/ui/Header/Header';
+import { Table } from 'components/ui/Table/Table';
+import { LoadingSpinner } from 'components/ui/LoadingSpinner/LoadingSpinner';
+import { Fallback } from 'components/Fallback/Fallback';
+import { useProducts } from 'api';
+import { columns } from 'components/ui/Table/tableConfig';
+import { useAppContext } from 'context/AppContext';
+import { FallbackType } from 'components/Fallback/types';
 import classes from './Catalog.module.css';
 
 export const Catalog = () => {

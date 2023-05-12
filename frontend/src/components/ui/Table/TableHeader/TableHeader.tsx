@@ -1,7 +1,7 @@
-import React from 'react';
-import { ReactComponent as ArrowUp } from '../../../../assets/arrow-up.svg';
-import { ReactComponent as ArrowDown } from '../../../../assets/arrow-down.svg';
-import { ReactComponent as ArrowSort } from '../../../../assets/arrow-sort.svg';
+import type { FC } from 'react';
+import { ReactComponent as ArrowUp } from 'assets/arrow-up.svg';
+import { ReactComponent as ArrowDown } from 'assets/arrow-down.svg';
+import { ReactComponent as ArrowSort } from 'assets/arrow-sort.svg';
 import type { TableColumn, SortConfig } from '../types';
 import classes from './TableHeader.module.css';
 
@@ -10,7 +10,7 @@ interface TableHeaderProps {
   sortConfig: SortConfig;
   setSortConfig: (config: SortConfig) => void;
 }
-export const TableHeader: React.FC<TableHeaderProps> = ({
+export const TableHeader: FC<TableHeaderProps> = ({
   columns,
   sortConfig,
   setSortConfig,

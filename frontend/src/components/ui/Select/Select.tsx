@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { ReactComponent as ArrowUp } from '../../../assets/arrow-up.svg';
-import { ReactComponent as ArrowDown } from '../../../assets/arrow-down.svg';
-import { useAppContext } from '../../../context/AppContext';
+import { useState } from 'react';
+import type { FC } from 'react';
+import { ReactComponent as ArrowUp } from 'assets/arrow-up.svg';
+import { ReactComponent as ArrowDown } from 'assets/arrow-down.svg';
+import { useAppContext } from 'context/AppContext';
 import classes from './Select.module.css';
 
 interface rowsPerPage {
@@ -14,7 +15,7 @@ interface SelectProps {
   options: rowsPerPage[];
 }
 
-export const Select: React.FC<SelectProps> = ({ options }) => {
+export const Select: FC<SelectProps> = ({ options }) => {
   const { setItemsPerPage, setPage } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
 

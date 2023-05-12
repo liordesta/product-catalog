@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { ReactComponent as Search } from '../../../assets/search.svg';
-import { useAppContext } from '../../../context/AppContext';
-import { debounce } from '../../../utils/helpers';
+import { ReactComponent as Search } from 'assets/search.svg';
+import { useAppContext } from 'context/AppContext';
+import { debounce } from 'utils/helpers';
 import classes from './SearchBar.module.css';
 
 interface SearchBarProps {

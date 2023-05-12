@@ -1,14 +1,14 @@
-import React from 'react';
-import { ReactComponent as ArrowRight } from '../../../assets/arrow-right.svg';
-import { ReactComponent as ArrowLeft } from '../../../assets/arrow-left.svg';
-import { useAppContext } from '../../../context/AppContext';
+import type { FC } from 'react';
+import { ReactComponent as ArrowRight } from 'assets/arrow-right.svg';
+import { ReactComponent as ArrowLeft } from 'assets/arrow-left.svg';
+import { useAppContext } from 'context/AppContext';
 import classes from './Pagination.module.css';
 
 interface PaginationProps {
   totalProducts: number;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({ totalProducts }) => {
+export const Pagination: FC<PaginationProps> = ({ totalProducts }) => {
   const { page, itemsPerPage, setPage } = useAppContext();
 
   const totalPages = Math.ceil(totalProducts / itemsPerPage);

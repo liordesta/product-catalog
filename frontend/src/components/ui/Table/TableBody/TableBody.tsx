@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC } from 'react';
 import { FixedSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import type { TableColumn, TableRow } from '../types';
@@ -10,11 +10,7 @@ interface TableBodyProps {
   columns: TableColumn[];
 }
 
-export const TableBody: React.FC<TableBodyProps> = ({
-  data,
-  rowHeight,
-  columns,
-}) => {
+export const TableBody: FC<TableBodyProps> = ({ data, rowHeight, columns }) => {
   const renderCellContent = (column: TableColumn, rowData: TableRow) => {
     if (column.key === 'availability') {
       return rowData[column.key] ? 'Yes' : 'No';

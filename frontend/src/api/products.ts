@@ -1,12 +1,28 @@
 import { useQuery } from 'react-query';
+import type { SortConfig } from 'components/ui/Table/types';
+
+type Key = {
+  queryKey: [
+    string,
+    {
+      page: number;
+      itemsPerPage: number;
+      q: string;
+      sortConfig: SortConfig;
+    }
+  ];
+  signal?: {};
+  pageParam?: number;
+  meta?: Record<string, unknown>;
+};
 
 const API_URL =
   process.env.NODE_ENV === 'development'
     ? process.env.REACT_APP_API_URL_LOCAL
     : process.env.REACT_APP_API_URL_PROD;
 
-const fetchProducts = async (key) => {
-  const { page, itemsPerPage, q, sortConfig } = key.queryKey[1];
+const fetchProducts = async (key: Key['queryKey']) => {
+  const { page, itemsPerPage, q, sortConfig } = key[1];
 
   const searchParam = q ? `&q=${q}` : '';
 
@@ -22,10 +38,15 @@ const fetchProducts = async (key) => {
   return data;
 };
 
-const useProducts = (page, itemsPerPage, q, sortConfig) => {
+const useProducts = (
+  page: number,
+  itemsPerPage: number,
+  q: string,
+  sortConfig: SortConfig
+) => {
   return useQuery(
-    ['products', { page, itemsPerPage, q, sortConfig }],
-    (key) => fetchProducts(key),
+    ['products', { page, itemsPerPage, q, sortConfig }] as Key['queryKey'],
+    (key) => fetchProducts(key.queryKey),
     { keepPreviousData: true }
   );
 };

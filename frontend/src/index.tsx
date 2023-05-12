@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppProvider } from './context/AppContext';
@@ -11,11 +11,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <AppProvider>
-      <QueryClientProvider client={queryClient}>
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <AppProvider>
         <App />
-      </QueryClientProvider>
-    </AppProvider>
-  </React.StrictMode>
+      </AppProvider>
+    </QueryClientProvider>
+  </StrictMode>
 );
